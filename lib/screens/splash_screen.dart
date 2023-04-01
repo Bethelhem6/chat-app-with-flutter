@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:we_chat/screens/auth/register.dart';
 
 import '../../main.dart';
 import '../api/apis.dart';

@@ -1,49 +1,100 @@
 {
   "project_info": {
-    "project_number": "288842837392",
-    "project_id": "we-chat-75f13",
-    "storage_bucket": "we-chat-75f13.appspot.com"
+    "project_number": "609178581563",
+    "project_id": "chat-app-86bd0",
+    "storage_bucket": "chat-app-86bd0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:288842837392:android:1353619813061d867a5715",
+        "mobilesdk_app_id": "1:609178581563:android:989a3d479ee3b0c4a5ba1e",
         "android_client_info": {
-          "package_name": "com.harshRajpurohit.we_chat"
+          "package_name": "com.android.application"
         }
       },
       "oauth_client": [
         {
-          "client_id": "288842837392-gvt1l790g0t1fmnurc5pmko3oss8b1tq.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.harshRajpurohit.we_chat",
-            "certificate_hash": "aa1014c75d3bcbaeff8097b6786a5633ee826e9b"
-          }
-        },
-        {
-          "client_id": "288842837392-tib1k52rlca0mlq4jr3iil7apgvcc5jt.apps.googleusercontent.com",
+          "client_id": "609178581563-i53t9k87oavj2i40gjm0n891ab0u4f1g.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBeszZHLYJNyjUhpujMH9yZ4ol9JqsAmPU"
+          "current_key": "AIzaSyDTlJpEa1rMqNYy7Qz2v-etMWNgy8JwmK8"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "288842837392-tib1k52rlca0mlq4jr3iil7apgvcc5jt.apps.googleusercontent.com",
+              "client_id": "609178581563-i53t9k87oavj2i40gjm0n891ab0u4f1g.apps.googleusercontent.com",
               "client_type": 3
-            },
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609178581563:android:5cfa428c0311b483a5ba1e",
+        "android_client_info": {
+          "package_name": "com.example.chat_example"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "609178581563-ueu8dcilkps0joik57a6vve67stlqn58.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chat_example",
+            "certificate_hash": "bdbc8f7efbde3257a776fbc8f574d3b48765f7ac"
+          }
+        },
+        {
+          "client_id": "609178581563-i53t9k87oavj2i40gjm0n891ab0u4f1g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTlJpEa1rMqNYy7Qz2v-etMWNgy8JwmK8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
             {
-              "client_id": "288842837392-sgib97u6439i4jte3bo19u00fh663euu.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.harshRajpurohit.weChat"
-              }
+              "client_id": "609178581563-i53t9k87oavj2i40gjm0n891ab0u4f1g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609178581563:android:86057c2540233228a5ba1e",
+        "android_client_info": {
+          "package_name": "com.example.chat_flutter_new"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "609178581563-i53t9k87oavj2i40gjm0n891ab0u4f1g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTlJpEa1rMqNYy7Qz2v-etMWNgy8JwmK8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "609178581563-i53t9k87oavj2i40gjm0n891ab0u4f1g.apps.googleusercontent.com",
+              "client_type": 3
             }
           ]
         }

@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
 }
 
 _initializeFirebase() async {
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp();
 
   var result = await FlutterNotificationChannel.registerNotificationChannel(
       description: 'For Showing Message Notification',
