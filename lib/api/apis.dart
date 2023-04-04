@@ -164,16 +164,14 @@ class APIs {
 
   // for getting all users from firestore database
   static Stream<QuerySnapshot<Map<String, dynamic>>> getAllUsers(
-      List<String> userIds) {
-    log('\nUserIds: $userIds');
+     userId) {
+    log('\nUserIds: $userId');
 
     return firestore
         .collection('users')
-        .where('id',
-            whereIn: userIds.isEmpty
-                ? ['']
-                : userIds) //because empty list throws an error
-        // .where('id', isNotEqualTo: user.uid)
+        .where('id')
+           //because empty list throws an error
+        .where('id', isNotEqualTo: user.uid)
         .snapshots();
   }
 

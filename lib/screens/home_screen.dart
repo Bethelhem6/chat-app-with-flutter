@@ -1,5 +1,8 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -71,129 +74,114 @@ class _HomeScreenState extends State<HomeScreen> {
           }
         },
         child: Scaffold(
-          //app bar
-          appBar: AppBar(
-            leading: const Icon(CupertinoIcons.home),
-            title: _isSearching
-                ? TextField(
-                    decoration: const InputDecoration(
-                        border: InputBorder.none, hintText: 'Name, Email, ...'),
-                    autofocus: true,
-                    style: const TextStyle(fontSize: 17, letterSpacing: 0.5),
-                    //when search text changes then updated search list
-                    onChanged: (val) {
-                      //search logic
-                      _searchList.clear();
+            //app bar
+            appBar: AppBar(
+              leading: const Icon(CupertinoIcons.home),
+              title: _isSearching
+                  ? TextField(
+                      decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Name, Email, ...'),
+                      autofocus: true,
+                      style: const TextStyle(fontSize: 17, letterSpacing: 0.5),
+                      //when search text changes then updated search list
+                      onChanged: (val) {
+                        //search logic
+                        _searchList.clear();
 
-                      for (var i in _list) {
-                        if (i.name.toLowerCase().contains(val.toLowerCase()) ||
-                            i.email.toLowerCase().contains(val.toLowerCase())) {
-                          _searchList.add(i);
-                          setState(() {
-                            _searchList;
-                          });
-                        }
-                      }
-                    },
-                  )
-                : const Text('We Chat'),
-            actions: [
-              //search user button
-              IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _isSearching = !_isSearching;
-                    });
-                  },
-                  icon: Icon(_isSearching
-                      ? CupertinoIcons.clear_circled_solid
-                      : Icons.search)),
-
-              //more features button
-              IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => ProfileScreen(user: APIs.me)));
-                  },
-                  icon: const Icon(Icons.more_vert))
-            ],
-          ),
-
-          //floating button to add new user
-          floatingActionButton: Padding(
-            padding: const EdgeInsets.only(bottom: 10),
-            child: FloatingActionButton(
-                onPressed: () {
-                  _addChatUserDialog();
-                },
-                child: const Icon(Icons.add_comment_rounded)),
-          ),
-
-          //body
-          body: StreamBuilder(
-            stream: APIs.getMyUsersId(),
-
-            //get id of only known users
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                //if data is loading
-                case ConnectionState.waiting:
-                case ConnectionState.none:
-                  return const Center(child: CircularProgressIndicator());
-
-                //if some or all data is loaded then show it
-                case ConnectionState.active:
-                case ConnectionState.done:
-                  return StreamBuilder(
-                    stream: APIs.getAllUsers(
-                        snapshot.data?.docs.map((e) => e.id).toList() ?? []),
-
-                    //get only those user, who's ids are provided
-                    builder: (context, snapshot) {
-                      switch (snapshot.connectionState) {
-                        //if data is loading
-                        case ConnectionState.waiting:
-                        case ConnectionState.none:
-                        // return const Center(
-                        //     child: CircularProgressIndicator());
-
-                        //if some or all data is loaded then show it
-                        case ConnectionState.active:
-                        case ConnectionState.done:
-                          final data = snapshot.data?.docs;
-                          _list = data
-                                  ?.map((e) => ChatUser.fromJson(e.data()))
-                                  .toList() ??
-                              [];
-
-                          if (_list.isNotEmpty) {
-                            return ListView.builder(
-                                itemCount: _isSearching
-                                    ? _searchList.length
-                                    : _list.length,
-                                padding: EdgeInsets.only(top: mq.height * .01),
-                                physics: const BouncingScrollPhysics(),
-                                itemBuilder: (context, index) {
-                                  return ChatUserCard(
-                                      user: _isSearching
-                                          ? _searchList[index]
-                                          : _list[index]);
-                                });
-                          } else {
-                            return const Center(
-                              child: Text('No Connections Found!',
-                                  style: TextStyle(fontSize: 20)),
-                            );
+                        for (var i in _list) {
+                          if (i.name
+                                  .toLowerCase()
+                                  .contains(val.toLowerCase()) ||
+                              i.email
+                                  .toLowerCase()
+                                  .contains(val.toLowerCase())) {
+                            _searchList.add(i);
+                            setState(() {
+                              _searchList;
+                            });
                           }
-                      }
+                        }
+                      },
+                    )
+                  : const Text('We Chat'),
+              actions: [
+                //search user button
+                IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _isSearching = !_isSearching;
+                      });
                     },
-                  );
-              }
-            },
-          ),
-        ),
+                    icon: Icon(_isSearching
+                        ? CupertinoIcons.clear_circled_solid
+                        : Icons.search)),
+
+                //more features button
+                IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => ProfileScreen(user: APIs.me)));
+                    },
+                    icon: const Icon(Icons.more_vert))
+              ],
+            ),
+
+            //floating button to add new user
+            floatingActionButton: Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: FloatingActionButton(
+                  onPressed: () {
+                    _addChatUserDialog();
+                  },
+                  child: const Icon(Icons.add_comment_rounded)),
+            ),
+
+            //body
+            body: StreamBuilder(
+              stream: APIs.getAllUsers(APIs.user.uid),
+
+              //get only those user, who's ids are provided
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  //if data is loading
+                  case ConnectionState.waiting:
+                  case ConnectionState.none:
+                  // return const Center(
+                  //     child: CircularProgressIndicator());
+
+                  //if some or all data is loaded then show it
+                  case ConnectionState.active:
+                  case ConnectionState.done:
+                    final data = snapshot.data?.docs;
+                    _list = data
+                            ?.map((e) => ChatUser.fromJson(e.data()))
+                            .toList() ??
+                        [];
+
+                    if (_list.isNotEmpty) {
+                      return ListView.builder(
+                          itemCount:
+                              _isSearching ? _searchList.length : _list.length,
+                          padding: EdgeInsets.only(top: mq.height * .01),
+                          physics: const BouncingScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            return ChatUserCard(
+                                user: _isSearching
+                                    ? _searchList[index]
+                                    : _list[index]);
+                          });
+                    } else {
+                      return const Center(
+                        child: Text('No Connections Found!',
+                            style: TextStyle(fontSize: 20)),
+                      );
+                    }
+                }
+              },
+            )),
       ),
     );
   }
