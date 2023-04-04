@@ -93,7 +93,6 @@ class APIs {
         .collection('users')
         .where('email', isEqualTo: email)
         .get();
-
     log('data: ${data.docs}');
 
     if (data.docs.isNotEmpty && data.docs.first.id != user.uid) {
