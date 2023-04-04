@@ -1,8 +1,6 @@
 import 'dart:developer';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -233,7 +231,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: const Text('Cancel',
                         style: TextStyle(color: Colors.blue, fontSize: 16))),
 
-                //add button
+                //add button 
                 MaterialButton(
                     onPressed: () async {
                       //hide alert dialog
